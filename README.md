@@ -35,6 +35,8 @@ Alternatively, you can set the `CREEM_API_KEY` environment variable.
 
 ## Usage
 
+For detailed API documentation, please refer to [USAGE.md](USAGE.md).
+
 ### Products
 
 ```elixir
