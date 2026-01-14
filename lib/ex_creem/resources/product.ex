@@ -5,15 +5,15 @@ defmodule ExCreem.Resources.Product do
 
   alias ExCreem.Client
 
-  def create(params) do
-    Client.post("/v1/products", params)
+  def create(params, opts \\ []) do
+    Client.post("/v1/products", params, opts)
   end
 
-  def get(id) do
-    Client.get("/v1/products/#{id}")
+  def get(id, opts \\ []) do
+    Client.get("/v1/products/#{id}", [], opts)
   end
 
-  def search(params \\ []) do
-    Client.get("/v1/products/search", params)
+  def search(params \\ [], opts \\ []) do
+    Client.get("/v1/products/search", params, opts)
   end
 end

@@ -5,15 +5,15 @@ defmodule ExCreem.Resources.License do
 
   alias ExCreem.Client
 
-  def activate(params) do
-    Client.post("/v1/licenses/activate", params)
+  def activate(params, opts \\ []) do
+    Client.post("/v1/licenses/activate", params, opts)
   end
 
-  def deactivate(params) do
-    Client.post("/v1/licenses/deactivate", params)
+  def deactivate(params, opts \\ []) do
+    Client.post("/v1/licenses/deactivate", params, opts)
   end
 
-  def validate(params) do
-    Client.post("/v1/licenses/validate", params)
+  def validate(params, opts \\ []) do
+    Client.post("/v1/licenses/validate", params, opts)
   end
 end

@@ -5,19 +5,19 @@ defmodule ExCreem.Resources.Subscription do
 
   alias ExCreem.Client
 
-  def get(id) do
-    Client.get("/v1/subscriptions/#{id}")
+  def get(id, opts \\ []) do
+    Client.get("/v1/subscriptions/#{id}", [], opts)
   end
 
-  def update(id, params) do
-    Client.post("/v1/subscriptions/#{id}", params)
+  def update(id, params, opts \\ []) do
+    Client.post("/v1/subscriptions/#{id}", params, opts)
   end
 
-  def cancel(id) do
-    Client.post("/v1/subscriptions/#{id}/cancel", %{})
+  def cancel(id, opts \\ []) do
+    Client.post("/v1/subscriptions/#{id}/cancel", %{}, opts)
   end
 
-  def upgrade(id, params) do
-    Client.post("/v1/subscriptions/#{id}/upgrade", params)
+  def upgrade(id, params, opts \\ []) do
+    Client.post("/v1/subscriptions/#{id}/upgrade", params, opts)
   end
 end

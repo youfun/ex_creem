@@ -7,7 +7,22 @@ defmodule ExCreem.Client do
 
   def new(opts \\ []) do
     api_key = opts[:api_key] || Config.api_key()
-    base_url = opts[:base_url] || Config.base_url()
+    
+    # Determine base URL:
+    # 1. Explicit :base_url option
+    # 2. :test_mode option (true -> test url, false -> default url)
+    # 3. Config.test_mode? (true -> test url, false -> default url)
+    # 4. Default URL (implied by step 3)
+    
+    test_mode = Keyword.get(opts, :test_mode, Config.test_mode?())
+    
+    base_url = 
+      opts[:base_url] || 
+      if test_mode do
+        "https://test-api.creem.io"
+      else
+        "https://api.creem.io"
+      end
 
     Req.new(base_url: base_url)
     |> Req.Request.put_header("x-api-key", api_key)
@@ -27,7 +42,10 @@ defmodule ExCreem.Client do
   end
 
   defp execute(method, path, body, opts) do
-    client = new(opts)
+    # Extract client-specific options to prevent them from being passed to Req
+    {client_opts, req_opts} = Keyword.split(opts, [:api_key, :test_mode, :base_url])
+    
+    client = new(client_opts)
 
     options =
       if body do
@@ -35,7 +53,7 @@ defmodule ExCreem.Client do
       else
         []
       end
-      |> Keyword.merge(opts)
+      |> Keyword.merge(req_opts)
 
     req = Req.merge(client, [{:method, method}, {:url, path} | options])
 

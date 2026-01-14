@@ -16,7 +16,7 @@ Add `ex_creem` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_creem, "~> 0.1.0"}
+    {:ex_creem, "~> 0.1.0"}  目前在gith上https://github.com/youfun/ex_creem/
   ]
 end
 ```
